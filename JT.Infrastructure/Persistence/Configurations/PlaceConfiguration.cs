@@ -11,5 +11,8 @@ public class PlaceConfiguration : IEntityTypeConfiguration<Place>
         builder.Property(t => t.Title)
             .HasMaxLength(300)
             .IsRequired();
+
+        builder
+            .OwnsOne(t => t.Localization);
     }
 }

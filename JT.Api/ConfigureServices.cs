@@ -1,4 +1,6 @@
-﻿using JT.Api.Services;
+﻿using FluentValidation.AspNetCore;
+using JT.Api.Filters;
+using JT.Api.Services;
 using JT.Application.Common.Interfaces;
 using JT.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,10 @@ public static class ConfigureServices
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
         services.AddHttpContextAccessor();
+
+        services.AddControllersWithViews(options =>
+            options.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
         services.AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>();

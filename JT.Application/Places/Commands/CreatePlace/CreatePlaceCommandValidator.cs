@@ -8,6 +8,7 @@ public class CreatePlaceCommandValidator : AbstractValidator<CreatePlaceCommand>
     {
         RuleFor(v => v.Title)
             .MaximumLength(300)
+            .MinimumLength(1)
             .NotEmpty();
     }
 }
